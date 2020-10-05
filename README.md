@@ -6,4 +6,4 @@ Options (specify in any order):
 - networktest: perform and display network speed test results
 - noshow: don't show Matplotlib interface (shown by default)
 - nosave: don't save image output (default is to save it)
-- "experiment label": any additional parameter will be used as experiment label and file name (default: "wrtest.py performance measurement")
+- "experiment label": any additional parameter will be used as experiment label and output file name (default: "wrtest.py performance measurement")
