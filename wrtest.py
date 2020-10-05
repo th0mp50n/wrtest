@@ -9,20 +9,22 @@ import numpy as np
 import copy
 
 # TODO:
-# c:/Users/GamePC/Sync/projects/python/write_file.py:54: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
-# stress test many small files (check limits from report)
+# on Python 3.7.3: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+# stress test many small files
 # improve time measurement
-  # can't perform read test if fail in write loop
-  # change clock() to time() or perf_counter(), check unix-like systems
+  # check perf_counter() on unix-like systems
+  # include python version check for perf_counter()
 # check for any read/write failures and catch exceptions
   # lost connection
   # quota exceeded
   # bit errors, etc
 
+
 # "repeats": number of times a file of certain size is written/read
 #   "repeats" list may be shorter than "labels" or "sizes"
 #   each file size must repeat at least 2 times
-repeats   = [100,    100,   50,      20,    15,     10,      4]
+# repeats   = [100,    100,   50,      20,    15,     10,      4]
+repeats   = [100,    100,   50,      10,    10,     4]
 labels    = ["1KB", "10KB", "100KB", "1MB", "10MB", "100MB", "1GB"]  # used as labels in filenames and graph
 sizes     = [i*j for i in [1024, 1024**2] for j in [1, 10, 100]] + [1024**3]  # actual file sizes as bytes
 line_size = 1024**2*50  # files written in "line_size" chunks
@@ -88,14 +90,14 @@ def quick_remove(list, elem):
     except ValueError:
         pass
 
-all_args = copy.deepcopy(sys.argv) #copy.deepcopy(sys.argv)
+all_args = copy.deepcopy(sys.argv)
 quick_remove(all_args, "noshow")
 quick_remove(all_args, "nosave")
 quick_remove(all_args, "networktest")
 for arg in all_args:
     if arg.endswith(".py"):
         all_args.remove(arg)
-title = "Write and read performance"
+title = "wrtest.py performance measurement"
 if len(all_args) == 1:
     title = all_args[0]
 elif len(all_args) > 1:
